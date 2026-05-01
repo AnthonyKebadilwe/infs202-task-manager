@@ -1,16 +1,20 @@
-CREAT TABLE IF NT EXIST users (
-    id INTEDER PRIMARY KEY AUTOINCREMENT,
+-- schema.sql
+-- Database schema for Task Manager application
+
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TABLE IF NOT EXISTS posts (
+
+CREATE TABLE IF NOT EXISTS tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    status TEXT NOT DEFAULT 'pending',
     title TEXT NOT NULL,
-    content TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description TEXT,
+    status TEXT DEFAULT 'pending',
+    user_id INTEGER NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
